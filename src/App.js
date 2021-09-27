@@ -18,7 +18,7 @@ const ScreenA = ({ navigation }) => {
       </Text>
       <Button
         title="ScreenA"
-        onPress={() => navigation.navigate('ScreenA')}
+        onPress={() => navigation.navigate('ScreenB')}
       />
     </View>
   );
@@ -33,7 +33,7 @@ const ScreenB = ({ navigation }) => {
       </Text>
       <Button
         title="ScreenB"
-        onPress={() => navigation.navigate('ScreenB')}
+        onPress={() => navigation.navigate('ScreenA')}
       />
     </View>
   );
@@ -45,8 +45,8 @@ export default function App() {
       <StatusBar backgroundColor={theme.background} barStyle="dark-content" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Screen_A" component={ScreenA} />
-          <Stack.Screen name="Screen_B" component={ScreenB} />
+          <Stack.Screen name="ScreenA" component={ScreenA} />
+          <Stack.Screen name="ScreenB" component={ScreenB} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
