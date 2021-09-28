@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components/native';
 import { ThemeContext } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, Image } from '../components';
+import { Button, Image, Input } from '../components';
 
 const Container = styled.View`
     flex: 1;
@@ -14,22 +14,36 @@ const Container = styled.View`
     padding-bottom: ${({ insets: { bottom } }) => bottom}px;
 `;
 
-const StyledText = styled.Text`
-    font-size: 30px;
-    color: #111111;
-`;
-
 const LOGO = 'https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png';
 
 const Signin = ({ navigation }) => {
     const insets = useSafeAreaInsets();
     const theme = useContext(ThemeContext);
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
         <Container insets={insets}>
             <Image url={LOGO} />
-            <StyledText>Signin</StyledText>
-            <Button title="Sign up" onPress={() => navigation.navigate('Signin')} />
+            <Input
+                label="Eamil"
+                placeholder="Email"
+                returnKeyType="next"
+                value={email}
+                onChangeText={setEmail}
+            />
+            <Input
+                label="Password"
+                placeholder="Password"
+                returnKeyType="done"
+                value={password}
+                onChangeText={setPassword}
+            />
+            <Button
+                title="Sign up"
+                onPress={() => navigation.navigate('Signin')}
+            />
             <Button
                 title="or sign up"
                 onPress={() => navigation.navigate('Signup')}
