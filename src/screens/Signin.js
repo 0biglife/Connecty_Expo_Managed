@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components/native';
 import { ThemeContext } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -22,6 +22,11 @@ const Signin = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const refPassword = useRef(null);
+
+    const _handleSigninBtnPress = () => {
+        console.log('Signin');
+    };
 
     return (
         <Container insets={insets}>
@@ -32,17 +37,21 @@ const Signin = ({ navigation }) => {
                 returnKeyType="next"
                 value={email}
                 onChangeText={setEmail}
+                onSubmitEditing={() => refPassword.current.focus()}
             />
             <Input
+                ref={refPassword}
                 label="Password"
                 placeholder="Password"
                 returnKeyType="done"
                 value={password}
                 onChangeText={setPassword}
+                isPassword={true}
+                onSubmitEditing={_handleSigninBtnPress}
             />
             <Button
-                title="Sign up"
-                onPress={() => navigation.navigate('Signin')}
+                title="Sign in"
+                onPress={_handleSigninBtnPress}
             />
             <Button
                 title="or sign up"
