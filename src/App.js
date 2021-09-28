@@ -3,9 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
-import { Button } from './components';
-import Signin from './screens/Signin';
-import Signup from './screens/Signup';
+import * as components from './components';
+import { Signin, Signup } from './screens';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,7 +19,7 @@ const ScreenA = ({ navigation }) => {
       <Text style={styles.text}>
         ScreenA
       </Text>
-      <Button
+      <components.Button
         title="ScreenA"
         onPress={() => navigation.navigate('ScreenB')}
       />
@@ -35,7 +34,7 @@ const ScreenB = ({ navigation }) => {
       <Text style={styles.text}>
         ScreenB
       </Text>
-      <Button
+      <components.Button
         title="ScreenB"
         onPress={() => navigation.navigate('ScreenA')}
       />
@@ -50,11 +49,11 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Signin"
-            component={Signin}
-            options={{ headerShown: false }}
+            name="Signin" component={Signin}
           />
-          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen
+            name="Signup" component={Signup}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
