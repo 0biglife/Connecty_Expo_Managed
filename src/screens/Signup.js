@@ -19,10 +19,6 @@ const Signup = ({ navigation }) => {
     return (
         <Container>
             <StyledText>Signup</StyledText>
-            <Button
-                title="Signup"
-                onPress={() => navigation.navigate('Signup')}
-            />
         </Container>
     );
 };

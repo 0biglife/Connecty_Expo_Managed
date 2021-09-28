@@ -7,6 +7,10 @@ const Container = styled.View`
     background-color: ${({ theme }) => theme.btnBackground};
     padding: 10px;
     margin: 10px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
 `;
 
 const Title = styled.Text`
@@ -14,11 +18,11 @@ const Title = styled.Text`
     color: ${({theme}) => theme.btnTitle};
 `;
 
-const Button = ({ title, onPress }) => {
+const Button = ({ title, onPress, containerStyle, textStyle }) => {
     return (
-        <TouchableOpacity onPress={onPress}>
-            <Container>
-                <Title>
+        <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row' }}>
+            <Container style={containerStyle}>
+                <Title style={textStyle}>
                     {title}
                 </Title>
             </Container>
@@ -29,6 +33,8 @@ const Button = ({ title, onPress }) => {
 Button.proptype = {
     title: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
+    containerStyle: PropTypes.object,
+    textStyle: PropTypes.object,
 };
 
 export default Button;
