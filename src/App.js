@@ -1,8 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
+import { Button } from './components';
+import Signin from './screens/Signin';
+import Signup from './screens/Signup';
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -45,8 +49,12 @@ export default function App() {
       <StatusBar backgroundColor={theme.background} barStyle="dark-content" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="ScreenA" component={ScreenA} />
-          <Stack.Screen name="ScreenB" component={ScreenB} />
+          <Stack.Screen
+            name="Signin"
+            component={Signin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Signup" component={Signup} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
