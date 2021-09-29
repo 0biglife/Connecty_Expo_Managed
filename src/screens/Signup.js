@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components/native';
 import { Button, Image, Input } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Alert } from 'react-native';
 
 const Container = styled.View`
 	flex: 1;
@@ -11,7 +12,11 @@ const Container = styled.View`
 	padding: 50px 20px;
 `;
 
-const Signup = () => {
+const DEFAULT_PHOTO =
+	'https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg';
+
+const Signup = ({ navigation }) => {
+	const [photo, setPhoto] = useState('DEFAULT_PHOTO');
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -23,12 +28,17 @@ const Signup = () => {
 
 	const _handleSignupBtnPress = () => {
 		console.log('Signup');
+		try {
+			navigation.navigate('Profile')
+		} catch (e) {
+			Alert.alert('Sign up Error', e.message)
+		}
 	};
 
 	return (
 		<KeyboardAwareScrollView extraScrollHeight={20}>
 			<Container>
-				<Image showButton={true} />
+				<Image showButton={true} url={photo} onChangePhoto={setPhoto} />
 				<Input
 					label="Name"
 					placeholder="Name"
@@ -66,7 +76,7 @@ const Signup = () => {
 					isPassword={true}
 					onSubmitEditing={_handleSignupBtnPress}
 				/>
-				<Button title="Sign up" onPress={_handleSignupBtnPress} />
+				<Button title="Sign up" onPress={(_handleSignupBtnPress)} />
 			</Container>
 		</KeyboardAwareScrollView>
 	);

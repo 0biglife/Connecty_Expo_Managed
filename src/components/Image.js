@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -42,7 +42,7 @@ const ProfileImage = styled.Image`
 	border-radius: 50px;
 `;
 
-const Image = ({ url, showButton }) => {
+const Image = ({ url, showButton, onChangePhoto }) => {
 	useEffect(() => {
 		(async () => {
 			if (Platform.OS !== 'web') {
@@ -50,29 +50,42 @@ const Image = ({ url, showButton }) => {
 					status,
 				} = await ImagePicker.requestMediaLibraryPermissionsAsync();
 				if (status !== 'granted') {
-					Alert.alert;
-					'Photo Permission', 'Please turn on the camera permission';
+					Alert.alert(
+						'Photo Permission',
+						'Please turn on the camera permission'
+					);
 				}
 			}
 		})();
 	}, []);
 
+	const _handlePhotoBtnPress = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 1,
+		});
+
+		console.log(result);
+
+		if (!result.cancelled) {
+			onChangePhoto(result.uri);
+		}
+	};
+
 	return (
 		<Container>
 			<ProfileImage source={{ url: url }} />
-			{showButton && <PhotoButton />}
+			{showButton && <PhotoButton onPress={_handlePhotoBtnPress} />}
 		</Container>
 	);
-};
-
-Image.defaultProps = {
-	url:
-		'https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg',
 };
 
 Image.propTypes = {
 	url: PropTypes.string,
 	showButton: PropTypes.bool,
+	onChangePhoto: PropTypes.func,
 };
 
 export default Image;
