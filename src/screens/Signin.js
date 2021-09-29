@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { ThemeContext } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Image, Input } from '../components';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Container = styled.View`
     flex: 1;
@@ -26,41 +27,43 @@ const Signin = ({ navigation }) => {
 
     const _handleSigninBtnPress = () => {
         console.log('Signin');
-    };
+    }; 
 
     return (
-        <Container insets={insets}>
-            <Image url={LOGO} />
-            <Input
-                label="Eamil"
-                placeholder="Email"
-                returnKeyType="next"
-                value={email}
-                onChangeText={setEmail}
-                onSubmitEditing={() => refPassword.current.focus()}
-            />
-            <Input
-                ref={refPassword}
-                label="Password"
-                placeholder="Password"
-                returnKeyType="done"
-                value={password}
-                onChangeText={setPassword}
-                isPassword={true}
-                onSubmitEditing={_handleSigninBtnPress}
-            />
-            <Button
-                title="Sign in"
-                onPress={_handleSigninBtnPress}
-            />
-            <Button
-                title="or sign up"
-                onPress={() => navigation.navigate('Signup')}
-                containerStyle={{ marginTop: 0, backgroundColor: 'transparent' }}
-                textStyle={{color: theme.btnTextLink, fontSize: 18}}
-            />
-        </Container>
-    );
+        <KeyboardAwareScrollView
+            extraScrollHeight={20}
+            contentContainerStyle={{ flex: 1 }}
+        >
+				<Container insets={insets}>
+					<Image url={LOGO} />
+					<Input
+						label="Eamil"
+						placeholder="Email"
+						returnKeyType="next"
+						value={email}
+						onChangeText={setEmail}
+						onSubmitEditing={() => refPassword.current.focus()}
+					/>
+					<Input
+						ref={refPassword}
+						label="Password"
+						placeholder="Password"
+						returnKeyType="done"
+						value={password}
+						onChangeText={setPassword}
+						isPassword={true}
+						onSubmitEditing={_handleSigninBtnPress}
+					/>
+					<Button title="Sign in" onPress={_handleSigninBtnPress} />
+					<Button
+						title="or sign up"
+						onPress={() => navigation.navigate("Signup")}
+						containerStyle={{ marginTop: 0, backgroundColor: "transparent" }}
+						textStyle={{ color: theme.btnTextLink, fontSize: 18 }}
+					/>
+				</Container>
+			</KeyboardAwareScrollView>
+		);
 };
 
 export default Signin;
