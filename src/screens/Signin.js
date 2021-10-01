@@ -5,6 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Image, Input } from '../components';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import {
+	GoogleSignin,
+	GoogleSigninButton,
+	statusCodes,
+} from '@react-native-community/google-signin';
+
 const Container = styled.View`
     flex: 1;
     justify-content: center;
@@ -36,7 +42,7 @@ const Signin = ({ navigation }) => {
         >
 				<Container insets={insets}>
 					<Image url={LOGO} />
-					<Input
+					{/* <Input
 						label="Eamil"
 						placeholder="Email"
 						returnKeyType="next"
@@ -54,7 +60,7 @@ const Signin = ({ navigation }) => {
 						isPassword={true}
 						onSubmitEditing={_handleSigninBtnPress}
 					/>
-					<Button title="Sign in" onPress={_handleSigninBtnPress} />
+					<Button title="Sign in" onPress={_handleSigninBtnPress} /> */}
 					<Button
 						title="or sign up"
 						onPress={() => navigation.navigate("Signup")}
