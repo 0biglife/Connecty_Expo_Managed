@@ -5,11 +5,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Image, Input } from '../components';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import {
-	GoogleSignin,
-	GoogleSigninButton,
-	statusCodes,
-} from '@react-native-community/google-signin';
+// import {
+// 	GoogleSignin,
+// 	GoogleSigninButton,
+// 	statusCodes,
+// } from '@react-native-community/google-signin';
 
 const Container = styled.View`
     flex: 1;
